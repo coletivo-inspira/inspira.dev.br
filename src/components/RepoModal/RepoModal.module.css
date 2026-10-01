@@ -1,0 +1,165 @@
+.dialog {
+  width: min(calc(100% - 2rem), 42rem);
+  max-width: none;
+  margin: auto;
+  padding: 0;
+  border: 2px solid var(--color-ink);
+  background: var(--color-offwhite);
+  box-shadow: 12px 12px 0 var(--color-orange);
+  color: var(--color-ink);
+}
+
+.dialog::backdrop {
+  background: var(--color-ink);
+}
+
+.dialog[open] {
+  animation: modalIn var(--duration-base) var(--ease-out) both;
+}
+
+.panel {
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  place-items: center;
+  border: 2px solid var(--color-ink);
+  background: var(--color-mustard);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+
+.closeIcon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.content {
+  padding: 2rem 1.25rem 1.25rem;
+}
+
+.title {
+  padding-right: 3.5rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.description {
+  margin-top: 1rem;
+  color: var(--color-muted);
+}
+
+.metaGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.metaBlock {
+  padding: 1rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-white);
+}
+
+.metaLabel,
+.topicsLabel {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.metaValue {
+  margin-top: 0.25rem;
+  color: var(--color-forest);
+  font-weight: 800;
+}
+
+.topicsSection {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--color-ink);
+}
+
+.topicsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.topicChip {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-forest);
+  color: var(--color-forest);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: grid;
+  min-height: 3.25rem;
+  padding: 0.75rem 1rem;
+  place-items: center;
+  border: 2px solid var(--color-ink);
+  font-weight: 800;
+  text-align: center;
+}
+
+.primaryAction {
+  background: var(--color-mustard);
+  box-shadow: var(--shadow-sm);
+}
+
+.secondaryAction {
+  background: var(--color-white);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover {
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .content {
+    padding: 2.5rem;
+  }
+
+  .metaGrid,
+  .actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

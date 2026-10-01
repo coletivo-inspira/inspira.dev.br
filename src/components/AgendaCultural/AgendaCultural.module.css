@@ -1,0 +1,77 @@
+.section {
+  padding: var(--section-space) 0;
+  background: var(--color-offwhite);
+  color: var(--color-ink);
+}
+
+.list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-white);
+  box-shadow: 6px 6px 0 var(--color-pink);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.status {
+  color: var(--color-pink);
+}
+
+.eyebrow {
+  color: var(--color-forest);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.card > p:not(.eyebrow) {
+  color: var(--color-muted);
+  max-width: 40rem;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding-top: 0.85rem;
+  border-top: 2px solid var(--color-ink);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.footer a {
+  color: var(--color-orange);
+}
+
+@media (min-width: 900px) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

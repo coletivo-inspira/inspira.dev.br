@@ -1,0 +1,122 @@
+.footer {
+  border-top: 2px solid var(--color-ink);
+  background: var(--color-forest);
+  color: var(--color-white);
+}
+.inner,
+.bottom {
+  width: min(100% - 2rem, var(--container));
+  margin: 0 auto;
+}
+
+.inner {
+  display: grid;
+  gap: 2.5rem;
+  padding: 4rem 0;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.inner p:last-child {
+  max-width: 28rem;
+  margin-top: 0.75rem;
+  color: var(--color-soft-white);
+}
+
+.inner nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.inner nav a {
+  padding: 0.75rem 0;
+  border-bottom: 2px solid var(--color-offwhite);
+  font-weight: 800;
+}
+
+.inner nav a:hover {
+  border-color: var(--color-mustard);
+  color: var(--color-mustard);
+}
+
+.sealRow {
+  width: min(100% - 2rem, var(--container));
+  margin: 0 auto;
+  padding-bottom: 1.5rem;
+}
+
+.seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 3.5rem;
+  padding: 0.65rem 1rem 0.65rem 0.65rem;
+  border: 2px solid var(--color-mustard);
+  background: var(--color-ink);
+  color: var(--color-offwhite);
+  box-shadow: 5px 5px 0 var(--color-mustard);
+  transition: transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.seal:hover {
+  box-shadow: 2px 2px 0 var(--color-mustard);
+  transform: translate(3px, 3px);
+}
+
+.sealMark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-mustard);
+  color: var(--color-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sealCopy {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.sealCopy strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sealCopy span {
+  color: var(--color-mustard);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--color-soft-white);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@media (min-width: 760px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}

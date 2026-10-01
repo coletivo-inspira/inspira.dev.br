@@ -1,0 +1,59 @@
+.strip {
+  border-block: 2px solid var(--color-ink);
+  background: var(--color-mustard);
+  color: var(--color-ink);
+}
+
+.inner {
+  display: grid;
+  width: min(100%, var(--container));
+  margin: 0 auto;
+}
+
+.metric {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 1.35rem 1rem;
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.metric:last-child {
+  border-bottom: 0;
+}
+
+.metric strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.metric span {
+  display: grid;
+  color: var(--color-forest);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.metric b {
+  color: var(--color-ink);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+@media (min-width: 720px) {
+  .inner {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .metric {
+    border-right: 2px solid var(--color-ink);
+    border-bottom: 0;
+  }
+
+  .metric:last-child {
+    border-right: 0;
+  }
+}
