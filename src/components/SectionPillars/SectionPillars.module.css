@@ -1,0 +1,96 @@
+.section {
+  padding: var(--section-space) 0;
+  background: var(--color-offwhite);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.card {
+  position: relative;
+  min-height: 22rem;
+  overflow: hidden;
+  padding: 1.75rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-white);
+  box-shadow: 8px 8px 0 var(--color-ink);
+  transition: transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 0.5rem;
+  background: var(--accent);
+  content: "";
+  transform: scaleX(0.2);
+  transform-origin: left;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.card[data-accent="orange"] {
+  --accent: var(--color-orange);
+}
+
+.card[data-accent="mustard"] {
+  --accent: var(--color-mustard);
+}
+
+.card[data-accent="pink"] {
+  --accent: var(--color-pink);
+}
+
+.card:hover {
+  box-shadow: 4px 4px 0 var(--color-ink);
+  transform: translate(4px, 4px);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.number {
+  display: block;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.label {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.card p:not(.label) {
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 1.25rem;
+  border-bottom: 2px solid var(--accent);
+  font-weight: 800;
+}
+
+@media (min-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+

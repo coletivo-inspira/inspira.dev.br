@@ -1,0 +1,127 @@
+.card {
+  display: flex;
+  min-height: 23rem;
+  flex-direction: column;
+  border: 2px solid var(--color-ink);
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+.index {
+  padding: 0.65rem 1rem;
+  border-bottom: 2px solid var(--color-ink);
+  color: var(--color-orange);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.body {
+  flex: 1;
+  padding: 1.35rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header h3 {
+  overflow-wrap: anywhere;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.header span {
+  padding: 0.2rem 0.45rem;
+  border: 1px solid var(--color-forest);
+  color: var(--color-forest);
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.description {
+  margin-top: 1rem;
+  color: var(--color-muted);
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.meta div {
+  padding-top: 0.75rem;
+  border-top: 2px solid var(--color-ink);
+}
+
+.meta dt {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.meta dd {
+  margin-top: 0.25rem;
+  color: var(--color-muted);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 2px solid var(--color-ink);
+}
+
+.actions button,
+.actions a {
+  display: grid;
+  min-height: 3.25rem;
+  padding: 0.75rem;
+  place-items: center;
+  border: 0;
+  background: var(--color-white);
+  color: var(--color-ink);
+  cursor: pointer;
+  font-weight: 800;
+  text-align: center;
+}
+
+.actions > :last-child:not(:first-child) {
+  border-left: 2px solid var(--color-ink);
+  background: var(--color-mustard);
+}
+
+.actions button:hover,
+.actions a:hover {
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+
+.skeleton {
+  pointer-events: none;
+}
+
+.skeletonLine {
+  height: 1rem;
+  margin-bottom: 1rem;
+  background: var(--color-soft-white);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.skeletonLine:nth-child(2) {
+  width: 78%;
+}
+
+.skeletonLine:nth-child(3) {
+  width: 54%;
+}
+
+@keyframes pulse {
+  50% {
+    background: var(--color-mustard);
+  }
+}
