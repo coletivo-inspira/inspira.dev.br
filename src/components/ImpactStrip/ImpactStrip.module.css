@@ -1,7 +1,6 @@
 .strip {
-  border-block: 2px solid var(--color-ink);
-  background: var(--color-mustard);
-  color: var(--color-ink);
+  background: transparent;
+  color: var(--color-forest);
 }
 
 .inner {
@@ -12,48 +11,48 @@
 
 .metric {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1rem;
-  align-items: center;
-  padding: 1.35rem 1rem;
-  border-bottom: 2px solid var(--color-ink);
+  grid-template-rows: 1fr auto;
+  min-height: 11rem;
 }
 
-.metric:last-child {
-  border-bottom: 0;
+.top,
+.base {
+  padding: 1.2rem 1rem;
+}
+
+.top {
+  background: var(--color-offwhite);
+}
+
+.base {
+  background: var(--color-mint);
+}
+
+.metric[data-tone="lime"] .base {
+  background: var(--color-lime);
 }
 
 .metric strong {
+  display: block;
   font-family: var(--font-display), sans-serif;
-  font-size: 2.4rem;
+  font-size: clamp(3rem, 8vw, 4.5rem);
   font-weight: 800;
-  line-height: 1;
-}
-
-.metric span {
-  display: grid;
-  color: var(--color-forest);
-  font-size: 0.82rem;
-  line-height: 1.35;
+  line-height: 0.9;
 }
 
 .metric b {
-  color: var(--color-ink);
-  font-size: 0.72rem;
-  text-transform: uppercase;
+  display: block;
+  font-size: 0.95rem;
 }
 
-@media (min-width: 720px) {
+.metric span {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 800px) {
   .inner {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .metric {
-    border-right: 2px solid var(--color-ink);
-    border-bottom: 0;
-  }
-
-  .metric:last-child {
-    border-right: 0;
   }
 }

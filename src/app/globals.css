@@ -1,13 +1,19 @@
 :root {
   --color-forest: #133824;
   --color-offwhite: #f7f7f4;
+  --color-bg-primary: #f7f7f4;
   --color-white: #ffffff;
   --color-soft-white: #eceee9;
-  --color-ink: #101b15;
-  --color-muted: #4f5e55;
-  --color-mustard: #e5a91e;
-  --color-orange: #f05d23;
-  --color-pink: #e5007c;
+  --color-ink: #133824;
+  --color-muted: #3d5246;
+  --color-mustard: #e5a93c;
+  --color-orange: #ff6b2c;
+  --color-pink: #ff3385;
+  --color-lime: #b4ff33;
+  --color-mint: #a7e8c8;
+  --border-hairline: 1px solid rgba(19, 56, 36, 0.16);
+  --shadow-inspira-soft: 4px 4px 0 rgba(19, 56, 36, 0.12);
+  --shadow-inspira-lime: 4px 4px 0 #b4ff33;
 
   --container: 78rem;
   --section-space: 6rem;
@@ -32,7 +38,9 @@ html {
 body {
   min-height: 100%;
   overflow-x: hidden;
-  background: var(--color-offwhite);
+  background-color: var(--color-bg-primary);
+  background-image: radial-gradient(rgba(19, 56, 36, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
   color: var(--color-ink);
   font-family: var(--font-body), sans-serif;
   font-size: 1rem;
@@ -121,7 +129,7 @@ img {
 }
 
 .section-heading-light > p:last-child {
-  color: var(--color-soft-white);
+  color: var(--color-muted);
 }
 
 .eyebrow,
@@ -151,23 +159,23 @@ img {
 
 .buttonPrimary,
 .btn-primary {
-  background: var(--color-mustard);
-  box-shadow: 5px 5px 0 var(--color-ink);
-  color: var(--color-ink);
+  background: var(--color-lime);
+  box-shadow: var(--shadow-inspira-soft);
+  color: var(--color-forest);
 }
 
 .buttonSecondary,
 .btn-secondary {
-  border-color: var(--color-offwhite);
-  background: var(--color-forest);
-  color: var(--color-white);
+  border-color: var(--color-forest);
+  background: transparent;
+  color: var(--color-forest);
 }
 
 .button:hover,
 .btn-primary:hover,
 .btn-secondary:hover {
-  box-shadow: 2px 2px 0 var(--color-ink);
-  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 rgba(19, 56, 36, 0.12);
+  transform: translate(2px, 2px);
 }
 
 @media (min-width: 760px) {

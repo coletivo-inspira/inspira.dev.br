@@ -1,32 +1,49 @@
+"use client";
+
+import { useState } from "react";
 import { pillars } from "@/data/hub";
-import { withBasePath } from "@/lib/basePath";
 import styles from "./SectionPillars.module.css";
 
 export function SectionPillars() {
+  const [openId, setOpenId] = useState(pillars[0]?.id ?? "Tecnologia");
+
   return (
     <section id="pilares" className={styles.section} aria-labelledby="pillars-title">
       <div className="section-container">
         <div className="section-heading">
-          <p className="eyebrow">Três frentes, um movimento</p>
+          <p className="eyebrow">Quatro frentes, um movimento</p>
           <h2 id="pillars-title">O que faz a gente fluir</h2>
           <p>
-            Cada projeto nasce em uma frente e cresce conectado às outras. É assim
-            que transformamos boas ideias em impacto real.
+            Cada frente abre como uma pasta. Tecnologia, cultura, saúde e diversidade
+            seguem no mesmo movimento.
           </p>
         </div>
 
-        <div className={styles.grid}>
-          {pillars.map((pillar) => (
-            <article className={styles.card} data-accent={pillar.accent} key={pillar.id}>
-              <span className={styles.number}>{pillar.number}</span>
-              <p className={styles.label}>{pillar.id}</p>
-              <h3>{pillar.title}</h3>
-              <p>{pillar.description}</p>
-              <a href={withBasePath(pillar.id === "Cultura" ? "/#agenda" : "/#vitrine")}>
-                Ver iniciativas
-              </a>
-            </article>
-          ))}
+        <div className={styles.stack}>
+          {pillars.map((pillar) => {
+            const open = openId === pillar.id;
+            return (
+              <article className={styles.folder} data-tone={pillar.tone} key={pillar.id}>
+                <button
+                  type="button"
+                  className={styles.tab}
+                  aria-expanded={open}
+                  aria-controls={`pilar-${pillar.id}`}
+                  onClick={() => setOpenId(pillar.id)}
+                >
+                  <span>{pillar.number}</span>
+                  <strong>{pillar.title}</strong>
+                  <b aria-hidden="true">{open ? "↓" : "→"}</b>
+                </button>
+                {open ? (
+                  <div className={styles.body} id={`pilar-${pillar.id}`}>
+                    <p>{pillar.description}</p>
+                    <p className={styles.summary}>{pillar.summary}</p>
+                  </div>
+                ) : null}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

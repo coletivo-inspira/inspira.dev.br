@@ -28,7 +28,7 @@ export function Footer() {
             +I
           </span>
           <span className={styles.sealCopy}>
-            <strong>Feito com Inspira</strong>
+            <strong>Feito com +INSPIRA</strong>
             <span>inspira.dev.br/solucoes</span>
           </span>
         </a>

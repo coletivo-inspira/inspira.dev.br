@@ -18,8 +18,8 @@ export default function SolucoesPage() {
           <p className="eyebrow">Soluções</p>
           <h1>O que o Inspira coloca em movimento.</h1>
           <p className={styles.lead}>
-            Do smartfólio gratuito às automações LINO e à produção cultural: um
-            selo, um ecossistema, três caminhos para começar.
+            Sites, automação com o LINO e um modelo freemium cuja mensalidade
+            sustenta o Coletivo Cuida e o Respira & Inspira.
           </p>
 
           <div className={styles.offerGrid}>

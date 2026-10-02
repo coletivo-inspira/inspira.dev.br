@@ -14,6 +14,28 @@
   justify-self: start;
 }
 
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+}
+
+.filters button {
+  min-height: 2.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-forest);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-forest);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.filters button[aria-pressed="true"] {
+  background: var(--color-mint);
+}
+
 .counter {
   margin-top: 2rem;
   color: var(--color-forest);

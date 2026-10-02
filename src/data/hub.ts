@@ -2,10 +2,11 @@ import type { Project, ProjectPillar } from "@/types/project";
 
 export interface Pillar {
   id: ProjectPillar;
-  number: `0${1 | 2 | 3}`;
+  number: `0${1 | 2 | 3 | 4}`;
   title: string;
+  summary: string;
   description: string;
-  accent: "orange" | "pink" | "mustard";
+  tone: "forest" | "orange" | "mint" | "mustard";
 }
 
 export interface ParticipationPath {
@@ -30,28 +31,40 @@ export const hubConfig = {
 
 export const pillars: readonly Pillar[] = [
   {
-    id: "Social",
-    number: "01",
-    title: "Impacto social",
-    description:
-      "Acolhimento, autonomia e redes de cuidado que transformam encontros em caminhos coletivos.",
-    accent: "orange",
-  },
-  {
     id: "Tecnologia",
-    number: "02",
-    title: "Tecnologia útil",
+    number: "01",
+    title: "Tecnologia e código",
+    summary: "Subdomínios, GitHub Pages e LINO.",
     description:
-      "LINO, portfólios e soluções B2B acessíveis para dar presença, organização e novas oportunidades a pessoas e negócios.",
-    accent: "mustard",
+      "Presença em seunome.inspira.dev.br, publicação no GitHub Pages e orquestração com o LINO.",
+    tone: "forest",
   },
   {
     id: "Cultura",
-    number: "03",
-    title: "Cultura viva",
+    number: "02",
+    title: "Cultura, arte e eventos",
+    summary: "Carnaboia, Desapego, Guavira Photo e Meu Bloquinho.",
     description:
-      "Experiências, imagens e festas que preservam memória, movimentam territórios e aproximam pessoas.",
-    accent: "pink",
+      "Festas, imagens e redes criativas que ligam Bonito-MS a Belo Horizonte.",
+    tone: "orange",
+  },
+  {
+    id: "Saude",
+    number: "03",
+    title: "Saúde e acolhimento",
+    summary: "Coletivo Cuida e Respira & Inspira.",
+    description:
+      "Triagem e cuidado coletivo, com práticas de respiração e encontros de escuta.",
+    tone: "mint",
+  },
+  {
+    id: "Diversidade",
+    number: "04",
+    title: "Diversidade e empoderamento",
+    summary: "Rede InspireELAS.",
+    description:
+      "Um espaço seguro para mulheres que fazem parte do ecossistema Inspira.",
+    tone: "mustard",
   },
 ] as const;
 
@@ -118,7 +131,8 @@ export const projects: readonly Project[] = [
     id: "canto-dos-passaros",
     title: "Canto dos Pássaros",
     eyebrow: "Experiência e território",
-    pillar: "Social",
+    pillar: "Saude",
+    showcase: "Saude",
     description:
       "Um espaço para valorizar escuta, natureza e pertencimento por meio de encontros com identidade local.",
     location: "Bonito-MS",
@@ -131,6 +145,7 @@ export const projects: readonly Project[] = [
     title: "Olhares",
     eyebrow: "Imagem e memória",
     pillar: "Cultura",
+    showcase: "Arte",
     description:
       "Narrativas visuais que registram pessoas, gestos e paisagens a partir de quem vive o território.",
     location: "Bonito-MS",
@@ -143,6 +158,8 @@ export const projects: readonly Project[] = [
     title: "HUDI Pages",
     eyebrow: "Smartfolios gratuitos",
     pillar: "Tecnologia",
+    showcase: "Portfolios",
+    stack: "TypeScript",
     description:
       "Um editor modular para qualquer pessoa criar e publicar gratuitamente seu portfólio no ecossistema Inspira.",
     location: "Digital",
@@ -155,6 +172,7 @@ export const projects: readonly Project[] = [
     title: "Carnaboia",
     eyebrow: "Festa e ecoturismo",
     pillar: "Cultura",
+    showcase: "Festas",
     description:
       "Uma celebração que conecta música, comunidade e a energia singular da Capital do Ecoturismo.",
     location: "Bonito-MS",
@@ -167,6 +185,7 @@ export const projects: readonly Project[] = [
     title: "Meu Bloquinho",
     eyebrow: "Carnaval de rua",
     pillar: "Cultura",
+    showcase: "Festas",
     description:
       "Identidade, produção e redes criativas que colocam o carnaval de rua em movimento.",
     location: "Belo Horizonte-MG",
@@ -178,7 +197,8 @@ export const projects: readonly Project[] = [
     id: "coletivo-cuida",
     title: "Coletivo Cuida",
     eyebrow: "Rede de acolhimento",
-    pillar: "Social",
+    pillar: "Saude",
+    showcase: "Saude",
     description:
       "Conexões de cuidado e desenvolvimento pensadas para fortalecer pessoas e iniciativas locais.",
     location: "Rede Inspira",

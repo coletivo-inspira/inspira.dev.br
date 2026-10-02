@@ -53,8 +53,8 @@ describe("Coletivo Inspira home", () => {
   it("presents impact metrics on the home", () => {
     render(<HomePageClient />);
 
-    expect(screen.getByText("Frentes regionais")).toBeInTheDocument();
-    expect(screen.getByText("Pilares conectados")).toBeInTheDocument();
+    expect(screen.getByText("Territórios conectados")).toBeInTheDocument();
+    expect(screen.getByText("Pilares de impacto")).toBeInTheDocument();
     expect(screen.getByText("Iniciativas no hub")).toBeInTheDocument();
   });
 
@@ -71,11 +71,11 @@ describe("Coletivo Inspira home", () => {
   it("filters the solutions showcase by pillar", () => {
     render(<HomePageClient />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Tecnologia" }));
+    fireEvent.click(screen.getByRole("button", { name: "Portfólios +" }));
 
     expect(screen.getByRole("heading", { name: "HUDI Pages" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Olhares" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Tecnologia" })).toHaveAttribute(
+    expect(screen.getByRole("button", { name: "Portfólios ×" })).toHaveAttribute(
       "aria-pressed",
       "true",
     );

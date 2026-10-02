@@ -1,6 +1,8 @@
-export type ProjectPillar = "Social" | "Tecnologia" | "Cultura";
+export type ProjectPillar = "Tecnologia" | "Cultura" | "Saude" | "Diversidade";
 
-export type ProjectFilter = "Todos" | ProjectPillar;
+export type ShowcaseTag = "Festas" | "Arte" | "Saude" | "Portfolios";
+
+export type ProjectFilter = "Todos" | ShowcaseTag;
 
 export type ProjectStatus = "Ativo" | "Em desenvolvimento" | "Concluído";
 
@@ -9,6 +11,8 @@ export interface Project {
   title: string;
   description: string;
   pillar: ProjectPillar;
+  showcase: ShowcaseTag;
+  stack?: string;
   eyebrow: string;
   location: string;
   status: ProjectStatus;

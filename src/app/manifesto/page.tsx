@@ -30,9 +30,8 @@ export default function ManifestoPage() {
               a inventividade mineira.
             </p>
             <p>
-              Atuamos em três pilares — Social, Tecnologia (LINO/B2B) e Cultura —
-              para que portfólios, negócios locais e encontros culturais fluam no
-              mesmo movimento.
+              Atuamos em quatro pilares — tecnologia, cultura, saúde e diversidade —
+              para que portfólios, cuidado e encontros culturais fluam no mesmo movimento.
             </p>
             <p>
               Acolhedores quando o tema é cuidado. Vibrantes quando o tema é
@@ -42,7 +41,7 @@ export default function ManifestoPage() {
 
           <div className={styles.actions}>
             <a className="button buttonPrimary" href={withBasePath("/#pilares")}>
-              Ver os três pilares
+              Ver os quatro pilares
             </a>
             <a className="button buttonSecondary" href={withBasePath("/solucoes/")}>
               Conhecer soluções

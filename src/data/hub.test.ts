@@ -4,11 +4,12 @@ import { hubConfig, pillars, projects, solutionsOffers } from "./hub";
 import { mainNavLinks } from "./navigation";
 
 describe("hub content registry", () => {
-  it("keeps the three approved pillars", () => {
+  it("keeps the four approved pillars", () => {
     expect(pillars.map((pillar) => pillar.id)).toEqual([
-      "Social",
       "Tecnologia",
       "Cultura",
+      "Saude",
+      "Diversidade",
     ]);
   });
 

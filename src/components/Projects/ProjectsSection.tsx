@@ -11,7 +11,7 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ selectedFilter, onFilterChange }: ProjectsSectionProps) {
   const visibleProjects = projects.filter(
-    (project) => selectedFilter === "Todos" || project.pillar === selectedFilter,
+    (project) => selectedFilter === "Todos" || project.showcase === selectedFilter,
   );
 
   return (
@@ -22,8 +22,7 @@ export function ProjectsSection({ selectedFilter, onFilterChange }: ProjectsSect
             <p className="eyebrow">Vitrine de soluções</p>
             <h2 id="vitrine-title">Ideias que já encontraram correnteza</h2>
             <p>
-              Portfólios, produtos e iniciativas dos três pilares. A ordem e o
-              conteúdo vêm do arquivo central de dados do hub.
+              Portfólios, festas, arte e cuidado. A ordem vem do arquivo central do hub.
             </p>
           </div>
 
@@ -47,17 +46,25 @@ interface ProjectFilterProps {
 
 function ProjectFilter({ selectedFilter, onFilterChange }: ProjectFilterProps) {
   return (
-    <div className={styles.filters} role="group" aria-label="Filtrar soluções por pilar">
-      {projectFilterLinks.map((item) => (
-        <button
-          key={item.filter}
-          type="button"
-          aria-pressed={selectedFilter === item.filter}
-          onClick={() => onFilterChange(item.filter)}
-        >
-          {item.label}
+    <div className={styles.filters} role="group" aria-label="Filtrar soluções">
+      {projectFilterLinks.map((item) => {
+        const active = selectedFilter === item.filter;
+        return (
+          <button
+            key={item.filter}
+            type="button"
+            aria-pressed={active}
+            onClick={() => onFilterChange(active && item.filter !== "Todos" ? "Todos" : item.filter)}
+          >
+            {item.label} {active && item.filter !== "Todos" ? "×" : "+"}
+          </button>
+        );
+      })}
+      {selectedFilter !== "Todos" ? (
+        <button type="button" onClick={() => onFilterChange("Todos")}>
+          Limpar filtros
         </button>
-      ))}
+      ) : null}
     </div>
   );
 }
@@ -71,8 +78,8 @@ function ProjectCard({ project, index }: ProjectCardProps) {
   const content = (
     <>
       <div className={styles.cardTopline}>
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <span>{project.status}</span>
+        <span>{project.showcase === "Portfolios" ? "Portfólio" : project.showcase}</span>
+        <span>{project.stack ?? project.status}</span>
       </div>
       <div className={styles.cardBody}>
         <p className={styles.cardEyebrow}>{project.eyebrow}</p>

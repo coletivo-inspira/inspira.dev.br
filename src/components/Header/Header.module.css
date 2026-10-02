@@ -2,9 +2,10 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 50;
-  border-bottom: 2px solid var(--color-ink);
-  background: var(--color-forest);
-  color: var(--color-white);
+  border-bottom: var(--border-hairline);
+  background: rgba(247, 247, 244, 0.9);
+  color: var(--color-forest);
+  backdrop-filter: blur(10px);
 }
 
 .inner {
@@ -79,9 +80,9 @@
   min-height: 2.75rem;
   align-items: center;
   padding: 0.65rem 1rem;
-  border: 2px solid var(--color-ink);
-  background: var(--color-mustard);
-  box-shadow: 4px 4px 0 var(--color-ink);
+  border: 2px solid var(--color-forest);
+  background: var(--color-lime);
+  box-shadow: var(--shadow-inspira-soft);
   color: var(--color-ink);
   font-size: 0.875rem;
   font-weight: 800;
@@ -102,9 +103,9 @@
   margin-left: auto;
   place-content: center;
   gap: 0.4rem;
-  border: 2px solid var(--color-offwhite);
-  background: var(--color-forest);
-  color: inherit;
+  border: 2px solid var(--color-forest);
+  background: transparent;
+  color: var(--color-forest);
   cursor: pointer;
 }
 
@@ -126,8 +127,9 @@
 
 .mobileNav {
   display: none;
-  border-top: 1px solid var(--color-offwhite);
-  background: var(--color-forest);
+  border-top: var(--border-hairline);
+  background: var(--color-offwhite);
+  color: var(--color-forest);
 }
 
 .mobileNavOpen {
@@ -136,7 +138,7 @@
 
 .mobileNav a {
   padding: 1rem;
-  border-bottom: 1px solid var(--color-offwhite);
+  border-bottom: var(--border-hairline);
   font-family: var(--font-display);
   font-weight: 700;
 }
