@@ -1,7 +1,7 @@
 .section {
   padding: var(--section-space) 0;
-  background: var(--color-forest);
-  color: var(--color-white);
+  background: transparent;
+  color: var(--color-forest);
 }
 .header {
   display: grid;
@@ -21,9 +21,10 @@
 .filters button {
   min-height: 2.75rem;
   padding: 0.65rem 1rem;
-  border: 2px solid var(--color-offwhite);
-  background: var(--color-forest);
-  color: var(--color-white);
+  border: 1px solid var(--color-forest);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-forest);
   cursor: pointer;
   font-weight: 800;
   transition: background var(--duration-fast) var(--ease-out),
@@ -33,24 +34,27 @@
 
 .filters button:hover,
 .filters button[aria-pressed="true"] {
-  background: var(--color-mustard);
-  color: var(--color-ink);
+  background: var(--color-lime);
+  color: var(--color-forest);
   transform: translateY(-2px);
 }
 
 .grid {
   display: grid;
-  gap: 1rem;
-  margin-top: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin-top: 2rem;
+  border-top: var(--border-hairline);
+  border-left: var(--border-hairline);
 }
 
 .card {
   display: flex;
-  min-height: 22rem;
+  min-height: 18rem;
   flex-direction: column;
-  border: 2px solid var(--color-offwhite);
-  background: var(--color-offwhite);
-  color: var(--color-ink);
+  border-right: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+  background: rgba(247, 247, 244, 0.85);
+  color: var(--color-forest);
   transition: transform var(--duration-base) var(--ease-out),
     box-shadow var(--duration-base) var(--ease-out);
   animation: projectIn 450ms var(--ease-out) both;

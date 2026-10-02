@@ -57,10 +57,10 @@
   gap: 0.9rem;
   min-height: 3.5rem;
   padding: 0.65rem 1rem 0.65rem 0.65rem;
-  border: 2px solid var(--color-mustard);
-  background: var(--color-ink);
-  color: var(--color-offwhite);
-  box-shadow: 5px 5px 0 var(--color-mustard);
+  border: 2px solid var(--color-forest);
+  background: var(--color-lime);
+  color: var(--color-forest);
+  box-shadow: var(--shadow-inspira-soft);
   transition: transform var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out);
 }

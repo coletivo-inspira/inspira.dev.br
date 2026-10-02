@@ -29,12 +29,14 @@ export function ImpactStrip() {
       </h2>
       <div className={styles.inner}>
         {metrics.map((metric) => (
-          <div className={styles.metric} key={metric.label}>
-            <strong>{metric.value}</strong>
-            <span>
+          <div className={styles.metric} data-tone={metric.tone ?? "mint"} key={metric.label}>
+            <div className={styles.top}>
+              <strong>{metric.value}</strong>
+            </div>
+            <div className={styles.base}>
               <b>{metric.label}</b>
-              {metric.description}
-            </span>
+              <span>{metric.description}</span>
+            </div>
           </div>
         ))}
       </div>

@@ -1,3 +1,4 @@
+import { repoCatalog } from "@/data/repoCatalog";
 import { formatGitHubDate } from "@/lib/github";
 import type { GitHubRepo, RepoMetadata } from "@/types/github";
 import styles from "./RepoCard.module.css";
@@ -11,10 +12,26 @@ interface RepoCardProps {
 export function RepoCard({ repo, metadata, onSelect }: RepoCardProps) {
   const portfolioUrl = metadata?.portfolioUrl ?? null;
   const contributors = metadata?.contributors;
+  const catalog = repoCatalog[repo.name];
+  const category = catalog?.category ?? (repo.has_pages ? "Portfólio" : "Repositório");
+  const stack = repo.language ?? catalog?.stack ?? "—";
 
   return (
     <article className={styles.card}>
-      <div className={styles.index}>GH</div>
+      <div className={styles.index}>
+        <span>{category}</span>
+        <span>{stack}</span>
+      </div>
+      {typeof contributors === "number" ? (
+        <span
+          className={styles.ring}
+          style={{ ["--progress" as string]: String(Math.min(contributors, 8) / 8) }}
+          aria-label={`${contributors} contribuidores`}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={repo.owner.avatar_url} alt="" width={36} height={36} />
+        </span>
+      ) : null}
       <div className={styles.body}>
         <div className={styles.header}>
           <h3>{repo.name}</h3>

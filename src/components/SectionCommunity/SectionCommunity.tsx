@@ -11,7 +11,13 @@ import styles from "./SectionCommunity.module.css";
 export function SectionCommunity() {
   const { repos, metadata, loading, error, rateLimited } = useGitHubRepos();
   const [selectedRepo, setSelectedRepo] = useState<GitHubRepo | null>(null);
+  const [language, setLanguage] = useState("Todos");
   const handleCloseModal = useCallback(() => setSelectedRepo(null), []);
+  const languages = Array.from(
+    new Set(repos.map((repo) => repo.language).filter((value): value is string => Boolean(value))),
+  );
+  const visibleRepos =
+    language === "Todos" ? repos : repos.filter((repo) => repo.language === language);
 
   return (
     <section id="comunidade" className={styles.section} aria-labelledby="community-title">
@@ -52,8 +58,26 @@ export function SectionCommunity() {
 
         {!loading && !error && !rateLimited && repos.length > 0 ? (
           <p className={styles.counter} role="status" aria-live="polite">
-            {repos.length} repositórios encontrados
+            {visibleRepos.length} repositórios encontrados
           </p>
+        ) : null}
+
+        {languages.length > 0 ? (
+          <div className={styles.filters} role="group" aria-label="Filtrar por linguagem">
+            {["Todos", ...languages].map((item) => {
+              const active = language === item;
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => setLanguage(active && item !== "Todos" ? "Todos" : item)}
+                >
+                  {item} {active && item !== "Todos" ? "×" : "+"}
+                </button>
+              );
+            })}
+          </div>
         ) : null}
 
         {!loading && !error && !rateLimited && repos.length === 0 ? (
@@ -62,7 +86,7 @@ export function SectionCommunity() {
 
         {!error && !rateLimited ? (
           <RepoGrid
-            repos={repos}
+            repos={visibleRepos}
             metadata={metadata}
             loading={loading}
             onSelectRepo={setSelectedRepo}

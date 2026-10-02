@@ -9,7 +9,7 @@ export interface ProjectFilterLink extends NavLink {
   filter: ProjectFilter;
 }
 
-/** Header público: Social, Tecnologia, Cultura e Manifesto (INSP-001). */
+/** Header público: atalhos da home e Manifesto. */
 export const mainNavLinks: readonly NavLink[] = [
   { label: "Social", href: "/#pilares" },
   { label: "Tecnologia", href: "/#vitrine" },
@@ -19,7 +19,8 @@ export const mainNavLinks: readonly NavLink[] = [
 
 export const projectFilterLinks: readonly ProjectFilterLink[] = [
   { label: "Todos", href: "/#vitrine", filter: "Todos" },
-  { label: "Social", href: "/#vitrine", filter: "Social" },
-  { label: "Tecnologia", href: "/#vitrine", filter: "Tecnologia" },
-  { label: "Cultura", href: "/#vitrine", filter: "Cultura" },
+  { label: "Festas", href: "/#vitrine", filter: "Festas" },
+  { label: "Arte", href: "/#vitrine", filter: "Arte" },
+  { label: "Saúde", href: "/#vitrine", filter: "Saude" },
+  { label: "Portfólios", href: "/#vitrine", filter: "Portfolios" },
 ] as const;

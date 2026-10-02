@@ -1,8 +1,9 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-2xl);
+  margin-top: 1.5rem;
+  border-top: var(--border-hairline);
+  border-left: var(--border-hairline);
 }
 
 @media (min-width: 640px) {

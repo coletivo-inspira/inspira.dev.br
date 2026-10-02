@@ -10,8 +10,8 @@ describe("impact metrics", () => {
 
   it("keeps the static transparency indicators", () => {
     expect(impactMetrics.map((metric) => metric.label)).toEqual([
-      "Frentes regionais",
-      "Pilares conectados",
+      "Territórios conectados",
+      "Pilares de impacto",
       "Iniciativas no hub",
     ]);
   });
