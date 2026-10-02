@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const syne = Syne({
-  subsets: ["latin"],
+const syne = localFont({
+  src: "../fonts/syne-latin.woff2",
   variable: "--font-display",
   display: "swap",
-  weight: ["700", "800"],
+  weight: "700 800",
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
+const dmSans = localFont({
+  src: "../fonts/dm-sans-latin.woff2",
   variable: "--font-body",
   display: "swap",
-  weight: ["400", "500", "700"],
+  weight: "400 700",
 });
 
 export const metadata: Metadata = {
