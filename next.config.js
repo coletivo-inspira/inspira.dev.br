@@ -1,6 +1,6 @@
 // @ts-check
 
-/** Project site on GitHub Pages (`/inspira.dev.br`). Empty for local `next dev`. */
+/** Empty on inspira.dev.br (custom domain, site at /). Set only for a project-site preview. */
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 
 /** @type {import('next').NextConfig} */
