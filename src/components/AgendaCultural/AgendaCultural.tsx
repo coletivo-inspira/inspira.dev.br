@@ -1,4 +1,5 @@
 import { culturalEvents } from "@/data/events";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./AgendaCultural.module.css";
 
 export function AgendaCultural() {
@@ -27,7 +28,7 @@ export function AgendaCultural() {
               <div className={styles.footer}>
                 <span>{event.location}</span>
                 {event.href ? (
-                  <a href={event.href}>
+                  <a href={withBasePath(event.href)}>
                     Detalhes <span aria-hidden="true">-&gt;</span>
                   </a>
                 ) : null}

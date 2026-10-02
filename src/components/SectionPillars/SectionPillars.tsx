@@ -1,4 +1,5 @@
 import { pillars } from "@/data/hub";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./SectionPillars.module.css";
 
 export function SectionPillars() {
@@ -21,7 +22,7 @@ export function SectionPillars() {
               <p className={styles.label}>{pillar.id}</p>
               <h3>{pillar.title}</h3>
               <p>{pillar.description}</p>
-              <a href={pillar.id === "Cultura" ? "/#agenda" : "/#vitrine"}>
+              <a href={withBasePath(pillar.id === "Cultura" ? "/#agenda" : "/#vitrine")}>
                 Ver iniciativas
               </a>
             </article>

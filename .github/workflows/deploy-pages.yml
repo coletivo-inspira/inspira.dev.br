@@ -40,6 +40,8 @@ jobs:
         run: npm test
 
       - name: Build site
+        env:
+          NEXT_PUBLIC_BASE_PATH: /inspira.dev.br
         run: npm run build
 
       - name: Upload Pages artifact

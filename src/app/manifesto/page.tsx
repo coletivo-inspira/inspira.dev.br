@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/SiteShell/SiteShell";
+import { withBasePath } from "@/lib/basePath";
 import styles from "../institutional.module.css";
 
 export const metadata: Metadata = {
@@ -40,10 +41,10 @@ export default function ManifestoPage() {
           </div>
 
           <div className={styles.actions}>
-            <a className="button buttonPrimary" href="/#pilares">
+            <a className="button buttonPrimary" href={withBasePath("/#pilares")}>
               Ver os três pilares
             </a>
-            <a className="button buttonSecondary" href="/solucoes/">
+            <a className="button buttonSecondary" href={withBasePath("/solucoes/")}>
               Conhecer soluções
             </a>
           </div>

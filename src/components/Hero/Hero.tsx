@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { hubConfig } from "@/data/hub";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./Hero.module.css";
 
 export function Hero() {
   return (
     <section id="inicio" className={styles.hero} aria-labelledby="hero-title">
       <Image
-        src="/image/image1.png"
+        src={withBasePath("/image/image1.png")}
         alt="Integrantes e encontros do Coletivo Inspira"
         fill
         sizes="100vw"
@@ -32,7 +33,7 @@ export function Hero() {
             <a href={hubConfig.hudiPagesUrl} className="button buttonPrimary">
               Criar meu portfólio gratuito <span aria-hidden="true">-&gt;</span>
             </a>
-            <a href={hubConfig.manifestoPath} className="button buttonSecondary">
+            <a href={withBasePath(hubConfig.manifestoPath)} className="button buttonSecondary">
               Ler o manifesto
             </a>
           </div>
