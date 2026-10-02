@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { hubConfig } from "@/data/hub";
 import { mainNavLinks } from "@/data/navigation";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -13,9 +14,9 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <a href="/#inicio" className={styles.brand} onClick={closeMobileMenu}>
+        <a href={withBasePath("/#inicio")} className={styles.brand} onClick={closeMobileMenu}>
           <Image
-            src="/image/logo/versao3.jpg"
+            src={withBasePath("/image/logo/versao3.jpg")}
             alt=""
             width={44}
             height={44}
@@ -27,7 +28,7 @@ export function Header() {
 
         <nav className={styles.desktopNav} aria-label="Navegação principal">
           {mainNavLinks.map((item) => (
-            <a key={`${item.label}-${item.href}`} href={item.href}>
+            <a key={`${item.label}-${item.href}`} href={withBasePath(item.href)}>
               {item.label}
             </a>
           ))}
@@ -58,7 +59,7 @@ export function Header() {
         {mainNavLinks.map((item) => (
           <a
             key={`mobile-${item.label}-${item.href}`}
-            href={item.href}
+            href={withBasePath(item.href)}
             onClick={closeMobileMenu}
           >
             {item.label}

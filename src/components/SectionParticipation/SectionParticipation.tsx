@@ -1,4 +1,5 @@
 import { hubConfig, participationPaths } from "@/data/hub";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./SectionParticipation.module.css";
 
 export function SectionParticipation() {
@@ -21,7 +22,7 @@ export function SectionParticipation() {
               <p className={styles.label}>{path.label}</p>
               <h3>{path.title}</h3>
               <p>{path.description}</p>
-              <a href={path.href}>
+              <a href={withBasePath(path.href)}>
                 {path.cta} <span aria-hidden="true">-&gt;</span>
               </a>
             </article>

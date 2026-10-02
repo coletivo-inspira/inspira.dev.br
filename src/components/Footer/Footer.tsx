@@ -1,4 +1,5 @@
 import { hubConfig } from "@/data/hub";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./Footer.module.css";
 
 export function Footer() {
@@ -20,7 +21,7 @@ export function Footer() {
       <div className={styles.sealRow}>
         <a
           className={styles.seal}
-          href={hubConfig.solucoesPath}
+          href={withBasePath(hubConfig.solucoesPath)}
           aria-label="Selo Inspira — conhecer soluções em inspira.dev.br/solucoes"
         >
           <span className={styles.sealMark} aria-hidden="true">

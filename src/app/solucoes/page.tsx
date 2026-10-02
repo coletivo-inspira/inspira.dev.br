@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/SiteShell/SiteShell";
 import { solutionsOffers } from "@/data/hub";
+import { withBasePath } from "@/lib/basePath";
 import styles from "../institutional.module.css";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function SolucoesPage() {
               <article className={styles.offerCard} key={offer.id}>
                 <h2>{offer.title}</h2>
                 <p>{offer.description}</p>
-                <a href={offer.href}>
+                <a href={withBasePath(offer.href)}>
                   {offer.cta} <span aria-hidden="true">-&gt;</span>
                 </a>
               </article>

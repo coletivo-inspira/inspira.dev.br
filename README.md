@@ -47,10 +47,13 @@ O workflow `.github/workflows/deploy-pages.yml` em push na `main`:
 1. `npm ci` → typecheck → test → build
 2. Publica `out/` no GitHub Pages
 
+O site é um project site em `https://coletivo-inspira.github.io/inspira.dev.br/`. O build de Pages define `NEXT_PUBLIC_BASE_PATH=/inspira.dev.br`, que vira `basePath` e `assetPrefix` no Next. Sem isso, CSS, JS e imagens são pedidos na raiz de `github.io` e respondem 404. No `npm run dev` o prefixo fica vazio e o site abre em `/`.
+
 Configuração manual no repositório:
 
 1. **Settings → Pages → Source:** GitHub Actions
-2. Domínio customizado alinhado ao `CNAME` (`inspira.dev.br`)
+
+O domínio `inspira.dev.br` ainda não resolve. O arquivo `CNAME` na raiz do repositório registra o destino futuro, mas **não** entra no artefato (`public/`) enquanto o DNS não existir. Publicá-lo agora faria o GitHub Pages apontar o site para um host que não responde.
 
 ### Cutover a partir de `coletivo-inspira/.github`
 

@@ -1,5 +1,6 @@
 import { projects } from "@/data/hub";
 import { projectFilterLinks } from "@/data/navigation";
+import { withBasePath } from "@/lib/basePath";
 import type { Project, ProjectFilter } from "@/types/project";
 import styles from "./ProjectsSection.module.css";
 
@@ -88,7 +89,7 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 
   if (project.href) {
     return (
-      <a className={styles.card} data-featured={project.featured} href={project.href}>
+      <a className={styles.card} data-featured={project.featured} href={withBasePath(project.href)}>
         {content}
       </a>
     );

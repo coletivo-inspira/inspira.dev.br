@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 import styles from "./SectionHistory.module.css";
 
 export function SectionHistory() {
@@ -26,14 +27,14 @@ export function SectionHistory() {
 
           <figure className={styles.gallery}>
             <Image
-              src="/image/image2.png"
+              src={withBasePath("/image/image2.png")}
               alt="Encontro cultural promovido pelo Coletivo Inspira"
               width={900}
               height={640}
               className={styles.mainPhoto}
             />
             <Image
-              src="/image/image3.png"
+              src={withBasePath("/image/image3.png")}
               alt="Pessoas da comunidade reunidas em uma ação do coletivo"
               width={600}
               height={600}
