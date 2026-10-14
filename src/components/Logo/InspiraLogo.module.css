@@ -5,25 +5,17 @@
   overflow: visible;
 }
 
-.animated .layerBg,
-.animated .layerPlus,
-.animated .letter,
-.animated .node,
-.animated .layerColetivo {
-  opacity: 0;
-}
-
 .animated .layerBg {
-  animation: inspiraFadeUp 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+  animation: inspiraFadeUp 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) both;
 }
 
 .animated .layerPlus {
   transform-origin: 231px 336px;
-  animation: inspiraPop 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) 0.12s forwards;
+  animation: inspiraPop 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) 0.12s both;
 }
 
 .animated .letter {
-  animation: inspiraFadeUp 0.5s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+  animation: inspiraFadeUp 0.5s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) both;
 }
 
 .animated .letter:nth-child(1) {
@@ -51,7 +43,7 @@
 .animated .node {
   transform-box: fill-box;
   transform-origin: center;
-  animation: inspiraNodeIn 0.35s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+  animation: inspiraNodeIn 0.35s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) both;
 }
 
 .animated .node:nth-child(1) {
@@ -155,7 +147,7 @@
 }
 
 .animated .layerColetivo {
-  animation: inspiraFadeUp 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) 1.45s forwards;
+  animation: inspiraFadeUp 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) 1.45s both;
 }
 
 @keyframes inspiraFadeUp {
