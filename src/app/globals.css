@@ -7,13 +7,13 @@
   --color-ink: #133824;
   --color-muted: #3d5246;
   --color-mustard: #e5a93c;
-  --color-orange: #ff6b2c;
-  --color-pink: #ff3385;
-  --color-lime: #b4ff33;
-  --color-mint: #a7e8c8;
+  --color-orange: #f05d23;
+  --color-pink: #e5007c;
+  --color-lime: #baff29;
+  --color-mint: #a3e5c2;
   --border-hairline: 1px solid rgba(19, 56, 36, 0.16);
   --shadow-inspira-soft: 4px 4px 0 rgba(19, 56, 36, 0.12);
-  --shadow-inspira-lime: 4px 4px 0 #b4ff33;
+  --shadow-inspira-lime: 4px 4px 0 #baff29;
 
   --container: 78rem;
   --section-space: 6rem;

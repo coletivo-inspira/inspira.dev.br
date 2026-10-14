@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { withBasePath } from "@/lib/basePath";
 import "./globals.css";
 
 const syne = localFont({
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   title: "Coletivo Inspira | inspira.dev.br",
   description:
     "Coletivo Inspira: arte, cultura, tecnologia e ecoturismo conectando pessoas e projetos em Bonito-MS.",
+  icons: { icon: withBasePath("/image/logo/logo.svg") },
 };
 
 export default function RootLayout({

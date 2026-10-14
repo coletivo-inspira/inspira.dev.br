@@ -11,7 +11,7 @@ describe("withBasePath", () => {
 
     expect(withBasePath("/manifesto/")).toBe("/manifesto/");
     expect(withBasePath("/#vitrine")).toBe("/#vitrine");
-    expect(withBasePath("/image/logo/versao3.jpg")).toBe("/image/logo/versao3.jpg");
+    expect(withBasePath("/image/logo/logo.svg")).toBe("/image/logo/logo.svg");
   });
 
   it("prefixes internal paths for the GitHub Pages project site", () => {
