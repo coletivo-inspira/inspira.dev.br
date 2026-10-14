@@ -1,5 +1,6 @@
 import { hubConfig } from "@/data/hub";
 import { withBasePath } from "@/lib/basePath";
+import { InspiraLogo } from "@/components/Logo/InspiraLogo";
 import styles from "./Footer.module.css";
 
 export function Footer() {
@@ -7,6 +8,9 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div>
+          <div className={styles.logoPanel}>
+            <InspiraLogo variant="transparent" className={styles.footerLogo} />
+          </div>
           <p className={styles.title}>Coletivo Inspira</p>
           <p>Cultura, tecnologia e impacto social em movimento.</p>
         </div>

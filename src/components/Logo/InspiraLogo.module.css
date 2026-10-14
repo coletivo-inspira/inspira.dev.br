@@ -1,0 +1,204 @@
+.root {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.animated .layerBg,
+.animated .layerPlus,
+.animated .letter,
+.animated .node,
+.animated .layerColetivo {
+  opacity: 0;
+}
+
+.animated .layerBg {
+  animation: inspiraFadeUp 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+
+.animated .layerPlus {
+  transform-origin: 231px 336px;
+  animation: inspiraPop 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) 0.12s forwards;
+}
+
+.animated .letter {
+  animation: inspiraFadeUp 0.5s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+
+.animated .letter:nth-child(1) {
+  animation-delay: 0.28s;
+}
+.animated .letter:nth-child(2) {
+  animation-delay: 0.34s;
+}
+.animated .letter:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.animated .letter:nth-child(4) {
+  animation-delay: 0.46s;
+}
+.animated .letter:nth-child(5) {
+  animation-delay: 0.52s;
+}
+.animated .letter:nth-child(6) {
+  animation-delay: 0.58s;
+}
+.animated .letter:nth-child(7) {
+  animation-delay: 0.64s;
+}
+
+.animated .node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: inspiraNodeIn 0.35s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) forwards;
+}
+
+.animated .node:nth-child(1) {
+  animation-delay: 0.75s;
+}
+.animated .node:nth-child(2) {
+  animation-delay: 0.78s;
+}
+.animated .node:nth-child(3) {
+  animation-delay: 0.81s;
+}
+.animated .node:nth-child(4) {
+  animation-delay: 0.84s;
+}
+.animated .node:nth-child(5) {
+  animation-delay: 0.87s;
+}
+.animated .node:nth-child(6) {
+  animation-delay: 0.9s;
+}
+.animated .node:nth-child(7) {
+  animation-delay: 0.93s;
+}
+.animated .node:nth-child(8) {
+  animation-delay: 0.96s;
+}
+.animated .node:nth-child(9) {
+  animation-delay: 0.99s;
+}
+.animated .node:nth-child(10) {
+  animation-delay: 1.02s;
+}
+.animated .node:nth-child(11) {
+  animation-delay: 1.05s;
+}
+.animated .node:nth-child(12) {
+  animation-delay: 1.08s;
+}
+.animated .node:nth-child(13) {
+  animation-delay: 1.11s;
+}
+.animated .node:nth-child(14) {
+  animation-delay: 1.14s;
+}
+.animated .node:nth-child(15) {
+  animation-delay: 1.17s;
+}
+.animated .node:nth-child(16) {
+  animation-delay: 1.2s;
+}
+.animated .node:nth-child(17) {
+  animation-delay: 1.23s;
+}
+.animated .node:nth-child(18) {
+  animation-delay: 1.26s;
+}
+.animated .node:nth-child(19) {
+  animation-delay: 1.29s;
+}
+.animated .node:nth-child(20) {
+  animation-delay: 1.32s;
+}
+.animated .node:nth-child(21) {
+  animation-delay: 1.35s;
+}
+.animated .node:nth-child(22) {
+  animation-delay: 1.38s;
+}
+.animated .node:nth-child(23) {
+  animation-delay: 1.41s;
+}
+.animated .node:nth-child(24) {
+  animation-delay: 1.44s;
+}
+.animated .node:nth-child(25) {
+  animation-delay: 1.47s;
+}
+.animated .node:nth-child(26) {
+  animation-delay: 1.5s;
+}
+.animated .node:nth-child(27) {
+  animation-delay: 1.53s;
+}
+.animated .node:nth-child(28) {
+  animation-delay: 1.56s;
+}
+.animated .node:nth-child(29) {
+  animation-delay: 1.59s;
+}
+.animated .node:nth-child(30) {
+  animation-delay: 1.62s;
+}
+.animated .node:nth-child(31) {
+  animation-delay: 1.65s;
+}
+.animated .node:nth-child(32) {
+  animation-delay: 1.68s;
+}
+.animated .node:nth-child(33) {
+  animation-delay: 1.71s;
+}
+
+.animated .layerColetivo {
+  animation: inspiraFadeUp 0.55s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)) 1.45s forwards;
+}
+
+@keyframes inspiraFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes inspiraPop {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes inspiraNodeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated .layerBg,
+  .animated .layerPlus,
+  .animated .letter,
+  .animated .node,
+  .animated .layerColetivo {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

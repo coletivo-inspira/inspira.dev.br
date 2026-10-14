@@ -37,6 +37,12 @@
   object-fit: cover;
 }
 
+.logoSvg {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+}
+
 .brand span {
   min-width: 0;
   overflow-wrap: anywhere;

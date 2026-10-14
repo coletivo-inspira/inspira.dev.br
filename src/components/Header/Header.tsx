@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { hubConfig } from "@/data/hub";
 import { mainNavLinks } from "@/data/navigation";
 import { withBasePath } from "@/lib/basePath";
+import { InspiraLogo } from "@/components/Logo/InspiraLogo";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -15,13 +15,11 @@ export function Header() {
     <header className={styles.header}>
       <div className={styles.inner}>
         <a href={withBasePath("/#inicio")} className={styles.brand} onClick={closeMobileMenu}>
-          <Image
-            src={withBasePath("/image/logo/versao3.jpg")}
-            alt=""
-            width={44}
-            height={44}
-            className={styles.logoImage}
-            priority
+          <InspiraLogo
+            variant="badge"
+            showSubtitle={false}
+            className={styles.logoSvg}
+            aria-hidden
           />
           <span>+INSPIRA</span>
         </a>
