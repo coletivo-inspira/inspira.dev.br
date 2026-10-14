@@ -19,6 +19,7 @@ describe("Coletivo Inspira home", () => {
     render(<HomePageClient />);
 
     expect(screen.getByRole("heading", { level: 1, name: "+INSPIRA" })).toBeInTheDocument();
+    expect(screen.getAllByRole("img", { name: "+INSPIRA COLETIVO" }).length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "O que faz a gente fluir" })).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "Ideias que já encontraram correnteza" }),

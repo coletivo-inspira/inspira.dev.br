@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { hubConfig } from "@/data/hub";
 import { withBasePath } from "@/lib/basePath";
+import { InspiraLogo } from "@/components/Logo/InspiraLogo";
 import styles from "./Hero.module.css";
 
 const BURST_TEXT = "BONITO-MS • BELO HORIZONTE • COLETIVO INSPIRA • ";
@@ -33,7 +34,14 @@ export function Hero() {
 
       <div className={styles.copy}>
         <p className={styles.eyebrow}>{hubConfig.location}</p>
-        <h1 id="hero-title">+INSPIRA</h1>
+        <h1 id="hero-title" className={styles.heroLogo} aria-label="+INSPIRA">
+          <InspiraLogo
+            variant="full"
+            animated
+            className={styles.heroMasterSvg}
+            aria-hidden
+          />
+        </h1>
         <p className={styles.lead}>Onde a natureza encontra a tecnologia.</p>
         <p className={styles.text}>
           Tecnologia, cultura, cuidado e diversidade conectando Bonito-MS a Belo Horizonte.

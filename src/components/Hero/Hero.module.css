@@ -55,6 +55,18 @@
   line-height: 0.9;
 }
 
+.heroLogo {
+  margin-top: 0.75rem;
+  max-width: min(100%, 22rem);
+}
+
+.heroMasterSvg {
+  width: 100%;
+  height: auto;
+  border: var(--border-hairline);
+  box-shadow: var(--shadow-inspira-soft);
+}
+
 .lead {
   max-width: 18ch;
   margin-top: 1rem;
