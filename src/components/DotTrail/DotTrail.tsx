@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { connectPoints, segmentAlpha, snapToGrid, type GridPoint } from "@/lib/dotTrail";
+import {
+  extendTrail,
+  segmentAlpha,
+  snapToGrid,
+  type GridPoint,
+  type TrailSegment,
+} from "@/lib/dotTrail";
 import styles from "./DotTrail.module.css";
 
 /** Must match the dotted `background-size` on `body` in globals.css. */
@@ -9,24 +15,29 @@ const GRID = 22;
 /** radial-gradient dots sit at the centre of each tile. */
 const GRID_OFFSET = GRID / 2;
 const LIFETIME_MS = 700;
+const CALM_LIFETIME_MS = 450;
 const NODE_SIZE = 8;
 const BAR_WIDTH = 3;
 const MAX_SEGMENTS = 40;
-/** Jumps longer than this (in grid cells) start a new trail instead of drawing a long bar. */
 const MAX_LINK_CELLS = 12;
 const FALLBACK_COLOR = "#a3e5c2";
+/** Without `mix-blend-mode` the mint would sit on top of text, so it is drawn lighter. */
+const NO_BLEND_OPACITY = 0.55;
 
-const DISABLED_QUERY = "(prefers-reduced-motion: reduce), (hover: none), (pointer: coarse)";
-
-interface Segment {
-  point: GridPoint;
-  from: GridPoint | null;
-  born: number;
-}
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
 function snapToDots(x: number, y: number): GridPoint {
   const snapped = snapToGrid(x - GRID_OFFSET, y - GRID_OFFSET, GRID);
   return { x: snapped.x + GRID_OFFSET, y: snapped.y + GRID_OFFSET };
+}
+
+/**
+ * Touch and pen input are ignored by checking `pointerType` on each event rather than
+ * `(hover: none)` / `(pointer: coarse)`: touchscreen laptops and some desktop browsers
+ * report those media features even when a mouse is in use.
+ */
+function isMouseEvent(event: PointerEvent | MouseEvent): boolean {
+  return !("pointerType" in event) || !event.pointerType || event.pointerType === "mouse";
 }
 
 export function DotTrail() {
@@ -35,18 +46,27 @@ export function DotTrail() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx || typeof window.matchMedia !== "function") return;
+    if (!canvas || !ctx) return;
 
-    const disabledQuery = window.matchMedia(DISABLED_QUERY);
+    const reducedMotion =
+      typeof window.matchMedia === "function" ? window.matchMedia(REDUCED_MOTION_QUERY) : null;
+    const blendSupported =
+      typeof CSS !== "undefined" && typeof CSS.supports === "function"
+        ? CSS.supports("mix-blend-mode", "multiply")
+        : false;
+    const opacity = blendSupported ? 1 : NO_BLEND_OPACITY;
     const color =
       getComputedStyle(document.documentElement).getPropertyValue("--color-mint").trim() ||
       FALLBACK_COLOR;
+    const moveEvent = "PointerEvent" in window ? "pointermove" : "mousemove";
 
-    let segments: Segment[] = [];
+    let calm = reducedMotion?.matches ?? false;
+    let segments: TrailSegment[] = [];
     let last: GridPoint | null = null;
     let pointer: { x: number; y: number } | null = null;
     let frame = 0;
-    let listening = false;
+
+    const lifetime = () => (calm ? CALM_LIFETIME_MS : LIFETIME_MS);
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
@@ -56,7 +76,8 @@ export function DotTrail() {
     };
 
     const draw = (now: number) => {
-      segments = segments.filter((segment) => now - segment.born < LIFETIME_MS);
+      const life = lifetime();
+      segments = segments.filter((segment) => now - segment.born < life);
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       ctx.fillStyle = color;
       ctx.strokeStyle = color;
@@ -66,11 +87,11 @@ export function DotTrail() {
       const offsetY = window.scrollY;
 
       for (const segment of segments) {
-        const alpha = segmentAlpha(now - segment.born, LIFETIME_MS);
-        const scale = 0.35 + 0.65 * alpha;
+        const alpha = segmentAlpha(now - segment.born, life);
+        const scale = calm ? 1 : 0.35 + 0.65 * alpha;
         const x = segment.point.x - offsetX;
         const y = segment.point.y - offsetY;
-        ctx.globalAlpha = alpha;
+        ctx.globalAlpha = alpha * opacity;
 
         if (segment.from) {
           ctx.lineWidth = BAR_WIDTH * scale;
@@ -88,75 +109,53 @@ export function DotTrail() {
       frame = segments.length > 0 ? requestAnimationFrame(draw) : 0;
     };
 
-    const ensureRunning = () => {
-      if (!frame) frame = requestAnimationFrame(draw);
-    };
-
     const trackPointer = () => {
       if (!pointer) return;
       const next = snapToDots(pointer.x + window.scrollX, pointer.y + window.scrollY);
       if (last && last.x === next.x && last.y === next.y) return;
 
-      const now = performance.now();
-      const cells = last ? Math.max(Math.abs(next.x - last.x), Math.abs(next.y - last.y)) / GRID : 0;
-
-      if (!last || cells > MAX_LINK_CELLS) {
-        segments.push({ point: next, from: null, born: now });
-      } else {
-        let previous = last;
-        for (const point of connectPoints(last, next, GRID)) {
-          segments.push({ point, from: previous, born: now });
-          previous = point;
-        }
-      }
-
-      if (segments.length > MAX_SEGMENTS) segments = segments.slice(-MAX_SEGMENTS);
+      segments = extendTrail(segments, last, next, performance.now(), {
+        step: GRID,
+        maxSegments: MAX_SEGMENTS,
+        maxLinkCells: MAX_LINK_CELLS,
+        calm,
+      });
       last = next;
-      ensureRunning();
+      if (!frame) frame = requestAnimationFrame(draw);
     };
 
-    const onPointerMove = (event: PointerEvent) => {
-      if (event.pointerType && event.pointerType !== "mouse") return;
-      pointer = { x: event.clientX, y: event.clientY };
+    const onMove = (event: Event) => {
+      const move = event as PointerEvent | MouseEvent;
+      if (!isMouseEvent(move)) return;
+      pointer = { x: move.clientX, y: move.clientY };
       trackPointer();
     };
 
-    const onPointerLeave = () => {
+    const onLeave = () => {
       pointer = null;
       last = null;
     };
 
-    const start = () => {
-      if (listening) return;
-      listening = true;
-      resize();
-      window.addEventListener("pointermove", onPointerMove, { passive: true });
-      window.addEventListener("scroll", trackPointer, { passive: true });
-      window.addEventListener("resize", resize);
-      document.documentElement.addEventListener("pointerleave", onPointerLeave);
-    };
-
-    const stop = () => {
-      if (!listening) return;
-      listening = false;
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("scroll", trackPointer);
-      window.removeEventListener("resize", resize);
-      document.documentElement.removeEventListener("pointerleave", onPointerLeave);
-      cancelAnimationFrame(frame);
-      frame = 0;
+    const onMotionChange = () => {
+      calm = reducedMotion?.matches ?? false;
       segments = [];
       last = null;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
     };
 
-    const sync = () => (disabledQuery.matches ? stop() : start());
-    sync();
-    disabledQuery.addEventListener?.("change", sync);
+    resize();
+    window.addEventListener(moveEvent, onMove, { passive: true });
+    window.addEventListener("scroll", trackPointer, { passive: true });
+    window.addEventListener("resize", resize);
+    document.documentElement.addEventListener("mouseleave", onLeave);
+    reducedMotion?.addEventListener?.("change", onMotionChange);
 
     return () => {
-      disabledQuery.removeEventListener?.("change", sync);
-      stop();
+      window.removeEventListener(moveEvent, onMove);
+      window.removeEventListener("scroll", trackPointer);
+      window.removeEventListener("resize", resize);
+      document.documentElement.removeEventListener("mouseleave", onLeave);
+      reducedMotion?.removeEventListener?.("change", onMotionChange);
+      cancelAnimationFrame(frame);
     };
   }, []);
 
