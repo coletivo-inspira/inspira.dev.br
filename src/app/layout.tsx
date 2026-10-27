@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { withBasePath } from "@/lib/basePath";
+import { DotTrail } from "@/components/DotTrail/DotTrail";
 import "./globals.css";
 
 const syne = localFont({
@@ -36,6 +37,7 @@ export default function RootLayout({
           Pular para o conteúdo
         </a>
         {children}
+        <DotTrail />
       </body>
     </html>
   );
