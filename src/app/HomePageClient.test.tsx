@@ -59,14 +59,21 @@ describe("Coletivo Inspira home", () => {
     expect(screen.getByText("Iniciativas no hub")).toBeInTheDocument();
   });
 
-  it("links to the free portfolio builder", () => {
+  it("no longer shows the portfolio builder buttons", () => {
     render(<HomePageClient />);
 
-    expect(
-      screen
-        .getAllByRole("link", { name: /Criar meu portfólio gratuito/ })
-        .every((link) => link.getAttribute("href") === hubConfig.hudiPagesUrl),
-    ).toBe(true);
+    const removedFrom = ["header", "#inicio", "#comunidade", "footer"];
+    for (const selector of removedFrom) {
+      const region = document.querySelector(selector);
+      expect(region).not.toBeNull();
+      expect(region?.querySelector(`a[href="${hubConfig.hudiPagesUrl}"]`)).toBeNull();
+    }
+  });
+
+  it("shows the +INSPIRA brand with the lime plus block in the header", () => {
+    render(<HomePageClient />);
+
+    expect(screen.getByRole("link", { name: "+INSPIRA" })).toHaveAttribute("href", "/#inicio");
   });
 
   it("filters the solutions showcase by pillar", () => {

@@ -3,7 +3,6 @@
 import { useCallback, useState } from "react";
 import { RepoGrid } from "@/components/RepoGrid/RepoGrid";
 import { RepoModal } from "@/components/RepoModal/RepoModal";
-import { hubConfig } from "@/data/hub";
 import { useGitHubRepos } from "@/hooks/useGitHubRepos";
 import type { GitHubRepo } from "@/types/github";
 import styles from "./SectionCommunity.module.css";
@@ -31,9 +30,6 @@ export function SectionCommunity() {
               ecossistema Coletivo Inspira.
             </p>
           </div>
-          <a className="button buttonPrimary" href={hubConfig.hudiPagesUrl}>
-            Criar meu portfólio
-          </a>
         </div>
 
         {rateLimited ? (
