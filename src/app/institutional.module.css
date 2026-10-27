@@ -1,8 +1,5 @@
 .page {
   padding: calc(var(--section-space) + 2rem) 0 var(--section-space);
-  background-color: var(--color-offwhite);
-  background-image: radial-gradient(rgba(19, 56, 36, 0.14) 1px, transparent 1px);
-  background-size: 22px 22px;
   color: var(--color-ink);
 }
 
