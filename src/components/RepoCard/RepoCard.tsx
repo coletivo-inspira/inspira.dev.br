@@ -12,38 +12,53 @@ interface RepoCardProps {
 export function RepoCard({ repo, metadata, onSelect }: RepoCardProps) {
   const portfolioUrl = metadata?.portfolioUrl ?? null;
   const contributors = metadata?.contributors;
+  const contributorList = metadata?.contributorList ?? [];
   const catalog = repoCatalog[repo.name];
   const category = catalog?.category ?? (repo.has_pages ? "Portfólio" : "Repositório");
-  const stack = repo.language ?? catalog?.stack ?? "—";
+  const stack = repo.language ?? catalog?.stack ?? null;
+  const hiddenContributors =
+    typeof contributors === "number" ? Math.max(contributors - contributorList.length, 0) : 0;
 
   return (
     <article className={styles.card}>
       <div className={styles.index}>
         <span>{category}</span>
-        <span>{stack}</span>
+        {stack ? <span className={styles.stack}>{stack}</span> : null}
       </div>
-      {typeof contributors === "number" ? (
-        <span
-          className={styles.ring}
-          style={{ ["--progress" as string]: String(Math.min(contributors, 8) / 8) }}
-          aria-label={`${contributors} contribuidores`}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={repo.owner.avatar_url} alt="" width={36} height={36} />
-        </span>
-      ) : null}
       <div className={styles.body}>
-        <div className={styles.header}>
-          <h3>{repo.name}</h3>
-          {repo.language ? <span>{repo.language}</span> : null}
-        </div>
+        <h3>{repo.name}</h3>
         <p className={styles.description}>
           {repo.description || "Este repositório ainda não possui descrição."}
         </p>
         <dl className={styles.meta}>
           <div>
             <dt>Contribuidores</dt>
-            <dd>{contributors ?? "--"}</dd>
+            <dd>
+              {contributorList.length > 0 ? (
+                <ul className={styles.avatars}>
+                  {contributorList.map((person) => (
+                    <li key={person.login}>
+                      <a
+                        href={person.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={person.login}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={person.avatar_url} alt={person.login} width={32} height={32} loading="lazy" />
+                      </a>
+                    </li>
+                  ))}
+                  {hiddenContributors > 0 ? (
+                    <li className={styles.avatarMore} aria-label={`mais ${hiddenContributors}`}>
+                      +{hiddenContributors}
+                    </li>
+                  ) : null}
+                </ul>
+              ) : (
+                (contributors ?? "--")
+              )}
+            </dd>
           </div>
           <div>
             <dt>Atualizado</dt>

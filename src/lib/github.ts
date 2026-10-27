@@ -1,12 +1,15 @@
-import type { GitHubRepo, ContributorCount } from "@/types/github";
+import type { ContributorSummary, GitHubContributor, GitHubRepo } from "@/types/github";
 
 export const GITHUB_ORG = "coletivo-inspira";
 
 export const GITHUB_ORG_REPOS_API =
   `https://api.github.com/orgs/${GITHUB_ORG}/repos?per_page=100` as const;
 
+const CONTRIBUTORS_PER_PAGE = 100;
+export const MAX_CONTRIBUTOR_AVATARS = 5;
+
 export function contributorsApiUrl(repoName: string): string {
-  return `https://api.github.com/repos/${GITHUB_ORG}/${repoName}/contributors?per_page=1`;
+  return `https://api.github.com/repos/${GITHUB_ORG}/${repoName}/contributors?per_page=${CONTRIBUTORS_PER_PAGE}`;
 }
 
 const GITHUB_HEADERS: HeadersInit = {
@@ -69,36 +72,34 @@ export async function fetchOrgRepos(): Promise<{
 }
 
 /**
- * Extracts contributor count from the paginated contributors endpoint.
- * Uses the `Link` header `last` page number when available, otherwise
- * falls back to the length of the first (and only) page.
+ * Fetches the contributor count and the most active contributors of a repo.
+ * When the repo has more than one page of contributors, the count is
+ * estimated from the `Link` header `last` page.
  *
  * Returns `null` when the data is unavailable (403, 404, network error).
  */
-export async function fetchContributorCount(
-  repoName: string,
-): Promise<ContributorCount> {
+export async function fetchContributors(repoName: string): Promise<ContributorSummary | null> {
   try {
     const response = await fetch(contributorsApiUrl(repoName), {
       headers: GITHUB_HEADERS,
     });
 
-    if (response.status === 403 || response.status === 404) {
-      return null;
-    }
-
     if (!response.ok) {
       return null;
     }
 
-    const link = response.headers.get("link");
-    if (link) {
-      const lastMatch = link.match(/page=(\d+)>; rel="last"/);
-      if (lastMatch) return parseInt(lastMatch[1], 10);
-    }
-
     const data: unknown = await response.json();
-    return Array.isArray(data) ? data.length : 0;
+    const list = Array.isArray(data) ? (data as GitHubContributor[]) : [];
+    const top = list.slice(0, MAX_CONTRIBUTOR_AVATARS).map(({ login, avatar_url, html_url }) => ({
+      login,
+      avatar_url,
+      html_url,
+    }));
+
+    const lastMatch = response.headers.get("link")?.match(/[?&]page=(\d+)>; rel="last"/);
+    const count = lastMatch ? parseInt(lastMatch[1], 10) * CONTRIBUTORS_PER_PAGE : list.length;
+
+    return { count, top };
   } catch {
     return null;
   }

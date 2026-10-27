@@ -6,7 +6,7 @@ import * as githubLib from '@/lib/github';
 // Mock the github lib
 vi.mock('@/lib/github', () => ({
   fetchOrgRepos: vi.fn(),
-  fetchContributorCount: vi.fn(),
+  fetchContributors: vi.fn(),
   getPortfolioUrl: vi.fn(),
 }));
 
@@ -44,7 +44,10 @@ describe('useGitHubRepos', () => {
       rateLimited: false,
     });
     vi.mocked(githubLib.getPortfolioUrl).mockReturnValue('https://example.com');
-    vi.mocked(githubLib.fetchContributorCount).mockResolvedValue(5);
+    vi.mocked(githubLib.fetchContributors).mockResolvedValue({
+      count: 5,
+      top: [{ login: 'ana', avatar_url: 'https://example.com/ana.png', html_url: 'https://github.com/ana' }],
+    });
 
     const { result } = renderHook(() => useGitHubRepos());
 
@@ -60,6 +63,7 @@ describe('useGitHubRepos', () => {
     await waitFor(() => {
       expect(result.current.metadata.get(1)?.contributors).toBe(5);
     });
+    expect(result.current.metadata.get(1)?.contributorList?.[0]?.login).toBe('ana');
   });
 
   it('should handle rate limits gracefully', async () => {

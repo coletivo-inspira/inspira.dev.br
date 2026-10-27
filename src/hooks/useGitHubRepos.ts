@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import type { GitHubRepo, RepoMetadata } from "@/types/github";
 import {
   fetchOrgRepos,
-  fetchContributorCount,
+  fetchContributors,
   getPortfolioUrl,
 } from "@/lib/github";
 
@@ -53,19 +53,20 @@ export function useGitHubRepos(): UseGitHubReposResult {
   const loadContributors = useCallback(
     (repoList: GitHubRepo[], currentMeta: Map<number, RepoMetadata>) => {
       for (const repo of repoList) {
-        // Skip if we already have the contributor count from cache
-        if (currentMeta.get(repo.id)?.contributors != null) {
+        // Skip if we already have the contributors from cache
+        if (currentMeta.get(repo.id)?.contributorList != null) {
           continue;
         }
 
-        fetchContributorCount(repo.name).then((count) => {
+        fetchContributors(repo.name).then((summary) => {
           setMetadata((prev) => {
             const next = new Map(prev);
             const existing = next.get(repo.id);
             next.set(repo.id, {
               portfolioUrl: existing?.portfolioUrl ?? getPortfolioUrl(repo),
-              contributors: count,
-              contributorStatus: count !== null ? "loaded" : "unavailable",
+              contributors: summary?.count ?? null,
+              contributorList: summary?.top,
+              contributorStatus: summary ? "loaded" : "unavailable",
             });
             // Update cache progressively
             saveToCache(repoList, next);
