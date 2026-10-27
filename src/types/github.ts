@@ -34,11 +34,24 @@ export type Repo = GitHubRepo;
 
 export type ContributorCount = number | null;
 
+export interface GitHubContributor {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
+
+export interface ContributorSummary {
+  count: number;
+  top: GitHubContributor[];
+}
+
 export type ContributorStatus = "loaded" | "unavailable" | "rate-limited";
 
 export interface RepoMetadata {
   portfolioUrl: string | null;
   contributors: ContributorCount;
+  /** Up to `MAX_CONTRIBUTOR_AVATARS` contributors, most active first. */
+  contributorList?: GitHubContributor[];
   contributorStatus: ContributorStatus;
 }
 

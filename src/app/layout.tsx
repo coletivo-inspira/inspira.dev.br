@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: "Coletivo Inspira | inspira.dev.br",
   description:
     "Coletivo Inspira: arte, cultura, tecnologia e ecoturismo conectando pessoas e projetos em Bonito-MS.",
-  icons: { icon: withBasePath("/image/logo/logo.svg") },
+  icons: { icon: withBasePath("/image/logo/plus.svg") },
 };
 
 export default function RootLayout({

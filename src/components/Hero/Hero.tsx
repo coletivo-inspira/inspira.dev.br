@@ -47,9 +47,6 @@ export function Hero() {
           Tecnologia, cultura, cuidado e diversidade conectando Bonito-MS a Belo Horizonte.
         </p>
         <div className={styles.actions}>
-          <a href={hubConfig.hudiPagesUrl} className="button buttonPrimary">
-            Criar meu portfólio gratuito <span aria-hidden="true">-&gt;</span>
-          </a>
           <a href={withBasePath(hubConfig.manifestoPath)} className="button buttonSecondary">
             Ler o manifesto
           </a>

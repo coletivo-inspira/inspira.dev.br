@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { hubConfig } from "@/data/hub";
 import { mainNavLinks } from "@/data/navigation";
 import { withBasePath } from "@/lib/basePath";
-import { InspiraLogo } from "@/components/Logo/InspiraLogo";
 import styles from "./Header.module.css";
 
 export function Header() {
@@ -14,14 +12,22 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <a href={withBasePath("/#inicio")} className={styles.brand} onClick={closeMobileMenu}>
-          <InspiraLogo
-            variant="badge"
-            showSubtitle={false}
-            className={styles.logoSvg}
-            aria-hidden
-          />
-          <span>+INSPIRA</span>
+        <a
+          href={withBasePath("/#inicio")}
+          className={styles.brand}
+          aria-label="+INSPIRA"
+          onClick={closeMobileMenu}
+        >
+          <span className={styles.plus} aria-hidden="true">
+            <svg viewBox="0 0 196 196">
+              <rect width="196" height="196" fill="#BAFF29" />
+              <path
+                d="M75 19 H121 V75 H177 V121 H121 V177 H75 V121 H19 V75 H75 V19 Z"
+                fill="#133824"
+              />
+            </svg>
+          </span>
+          <span aria-hidden="true">INSPIRA</span>
         </a>
 
         <nav className={styles.desktopNav} aria-label="Navegação principal">
@@ -31,10 +37,6 @@ export function Header() {
             </a>
           ))}
         </nav>
-
-        <a className={styles.cta} href={hubConfig.hudiPagesUrl}>
-          Criar portfólio
-        </a>
 
         <button
           type="button"
@@ -63,9 +65,6 @@ export function Header() {
             {item.label}
           </a>
         ))}
-        <a href={hubConfig.hudiPagesUrl} onClick={closeMobileMenu}>
-          Criar meu portfólio gratuito
-        </a>
       </nav>
     </header>
   );

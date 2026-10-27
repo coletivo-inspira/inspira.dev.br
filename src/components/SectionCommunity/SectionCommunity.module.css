@@ -10,10 +10,6 @@
   align-items: end;
 }
 
-.header > a {
-  justify-self: start;
-}
-
 .filters {
   display: flex;
   flex-wrap: wrap;

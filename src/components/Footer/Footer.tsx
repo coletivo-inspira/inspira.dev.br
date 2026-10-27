@@ -18,7 +18,6 @@ export function Footer() {
           <a href={hubConfig.instagramUrl}>Instagram</a>
           <a href={hubConfig.whatsappUrl}>WhatsApp</a>
           <a href={hubConfig.githubUrl}>GitHub</a>
-          <a href={hubConfig.hudiPagesUrl}>HUDI Pages</a>
         </nav>
       </div>
 
