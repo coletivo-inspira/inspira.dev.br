@@ -40,12 +40,33 @@ Métricas remotas (opcional): defina `NEXT_PUBLIC_IMPACT_URL` apontando para JSO
 - `/manifesto/` — Manifesto institucional
 - `/solucoes/` — Vitrine de soluções (destino do selo de rodapé)
 
+## Ambientes
+
+O portal vive neste repositório. Desenvolvimento, homologação e produção são branches da mesma base de código:
+
+| Branch | Papel |
+|---|---|
+| `develop` | Integração do que está em desenvolvimento. Push roda typecheck, teste e build. |
+| `homolog` | Linha estável para validar antes de ir ao ar. Push roda typecheck, teste e build. |
+| `main` | Produção. Push roda a mesma validação e publica `https://inspira.dev.br/`. |
+
+Trabalho novo nasce numa branch de feature, entra por pull request em `develop`, sobe para `homolog` e só então para `main`.
+
+O GitHub Pages publica um site por repositório. `develop` e `homolog` não geram um segundo endereço. A publicação continua só na `main`.
+
+Proteção recomendada em **Settings → Rules → Rulesets** (ou **Branches**), para `main` e `homolog`:
+
+1. Exigir pull request antes de integrar
+2. Bloquear push direto
+
 ## Deploy (GitHub Pages)
 
-O workflow `.github/workflows/deploy-pages.yml` em push na `main`:
+O workflow `.github/workflows/deploy-pages.yml` reage a push em `develop`, `homolog` e `main`:
 
 1. `npm ci` → typecheck → test → build
-2. Publica `out/` no GitHub Pages
+2. Publica `out/` no GitHub Pages apenas quando o push é na `main`
+
+Um push em `develop` ou `homolog` não cancela um deploy de produção que já esteja em andamento.
 
 O domínio público é `https://inspira.dev.br/`. O GitHub Pages serve esse host na raiz, então o build **não** usa `basePath`. Um prefixo `/inspira.dev.br` faria o navegador pedir CSS, JS e imagens em `https://inspira.dev.br/inspira.dev.br/...` e receber 404.
 

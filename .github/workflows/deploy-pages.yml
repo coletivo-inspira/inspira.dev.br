@@ -2,16 +2,18 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "homolog", "develop"]
   pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# A produção usa um grupo próprio e não é cancelada por push em develop ou homolog.
+# Cada uma dessas branches cancela só a própria execução anterior.
 concurrency:
-  group: github-pages
-  cancel-in-progress: true
+  group: ${{ github.ref == 'refs/heads/main' && 'github-pages' || format('ci-{0}', github.ref_name) }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   build:
