@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { withBasePath } from "@/lib/basePath";
 import { DotTrail } from "@/components/DotTrail/DotTrail";
+import { InspiraOrb } from "@/components/InspiraOrb/InspiraOrb";
 import "./globals.css";
 
 const syne = localFont({
@@ -38,6 +39,7 @@ export default function RootLayout({
         </a>
         {children}
         <DotTrail />
+        <InspiraOrb href="/" />
       </body>
     </html>
   );
