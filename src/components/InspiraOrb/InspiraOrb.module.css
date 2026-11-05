@@ -1,16 +1,11 @@
 .orb {
+  --orb-size: 5.25rem;
   --orb-lime: var(--color-lime, #baff29);
-  --orb-mint: var(--color-mint, #a3e5c2);
-  --orb-orange: var(--color-orange, #f05d23);
   --orb-forest: var(--color-forest, #133824);
-  --orb-core: var(--orb-lime);
-  --orb-glow: var(--orb-mint);
-  --orb-accent: var(--orb-orange);
-  --orb-size: 4rem;
 
   position: fixed;
-  left: 1.1rem;
-  bottom: 1.1rem;
+  left: 0.85rem;
+  bottom: 0.85rem;
   z-index: 70;
   width: var(--orb-size);
   height: var(--orb-size);
@@ -18,170 +13,42 @@
   place-items: center;
   border-radius: 50%;
   text-decoration: none;
+  background: transparent;
   isolation: isolate;
   outline: none;
-  transform: translateZ(0);
-  animation: palette 14s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .orb:focus-visible {
   box-shadow:
-    0 0 0 3px var(--orb-forest),
-    0 0 0 6px var(--orb-lime);
+    0 0 0 2px var(--orb-forest),
+    0 0 0 4px var(--orb-lime);
 }
 
-.stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-
-.aura {
-  position: absolute;
-  inset: -18%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--orb-glow) 55%, transparent) 0%,
-    transparent 68%
-  );
-  filter: blur(6px);
-  opacity: 0.85;
-  pointer-events: none;
-  animation: breathe 4.8s ease-in-out infinite;
-}
-
-.core {
-  position: absolute;
-  inset: 18%;
-  border-radius: 50%;
-  overflow: hidden;
-  filter: contrast(1.15);
-  background:
-    radial-gradient(circle at 40% 35%, #fff8 0%, transparent 42%),
-    radial-gradient(
-      circle at 50% 50%,
-      var(--orb-core) 0%,
-      color-mix(in srgb, var(--orb-glow) 70%, var(--orb-accent)) 55%,
-      transparent 72%
-    );
-  box-shadow: 0 0 18px color-mix(in srgb, var(--orb-glow) 55%, transparent);
-}
-
-.blobA,
-.blobB,
-.blobC {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(5px);
-  opacity: 0.92;
-}
-
-.blobA {
-  width: 58%;
-  height: 58%;
-  left: 8%;
-  top: 14%;
-  background: radial-gradient(circle, var(--orb-core), transparent 70%);
-  animation: driftA 6.4s ease-in-out infinite;
-}
-
-.blobB {
-  width: 48%;
-  height: 48%;
-  right: 4%;
-  bottom: 10%;
-  background: radial-gradient(circle, var(--orb-glow), transparent 70%);
-  animation: driftB 7.2s ease-in-out infinite;
-}
-
-.blobC {
-  width: 36%;
-  height: 36%;
-  left: 34%;
-  bottom: 8%;
-  background: radial-gradient(circle, var(--orb-accent), transparent 70%);
-  animation: driftC 5.6s ease-in-out infinite;
-}
-
-.rings {
+.canvas {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  animation: spin 18s linear infinite;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-}
-
-.ring,
-.ringInner {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.7;
-}
-
-.ring {
-  inset: 4%;
-  border: 1px solid color-mix(in srgb, var(--orb-glow) 45%, transparent);
-  border-top-color: transparent;
-  border-left-color: transparent;
-}
-
-.ringInner {
-  inset: 14%;
-  border: 1px solid color-mix(in srgb, var(--orb-accent) 40%, transparent);
-  border-bottom-color: transparent;
-  border-right-color: transparent;
-  animation: spinRev 12s linear infinite;
-}
-
-.sat1,
-.sat2,
-.sat3 {
-  position: absolute;
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--orb-glow);
-}
-
-.sat1 {
-  top: 8%;
-  left: 46%;
-  width: 0.35rem;
-  height: 0.35rem;
-  background: var(--orb-core);
-}
-
-.sat2 {
-  bottom: 14%;
-  right: 6%;
-  width: 0.28rem;
-  height: 0.28rem;
-  background: var(--orb-accent);
-}
-
-.sat3 {
-  top: 42%;
-  left: 2%;
-  width: 0.22rem;
-  height: 0.22rem;
-  background: var(--orb-mint);
 }
 
 .plus {
-  position: absolute;
-  inset: 28%;
+  position: relative;
+  z-index: 2;
+  width: 38%;
+  height: 38%;
   border-radius: 22%;
   background: var(--orb-lime);
   border: 1.5px solid var(--orb-forest);
-  box-shadow: 2px 2px 0 color-mix(in srgb, var(--orb-forest) 55%, transparent);
+  box-shadow: 2px 2px 0 color-mix(in srgb, var(--orb-forest) 45%, transparent);
   display: grid;
   place-items: center;
   opacity: 0;
-  transform: scale(0.55) rotate(-18deg);
+  transform: scale(0.55) rotate(-12deg);
   transition:
-    opacity 0.28s ease,
-    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 2;
+    opacity 0.32s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
 }
 
@@ -191,130 +58,29 @@
   display: block;
 }
 
-.orb:hover,
-.orb:focus-visible {
-  transform: scale(1.06);
-}
-
 .orb:hover .plus,
 .orb:focus-visible .plus {
   opacity: 1;
   transform: scale(1) rotate(0deg);
+  animation: plusSpin 2.8s linear infinite;
+  animation-delay: 0.28s;
 }
 
-.orb:hover .rings,
-.orb:focus-visible .rings {
-  animation-duration: 5.5s;
-}
-
-.orb:hover .ringInner,
-.orb:focus-visible .ringInner {
-  animation-duration: 3.8s;
-}
-
-.reduced {
+.reduced:hover .plus,
+.reduced:focus-visible .plus {
   animation: none;
-  --orb-core: var(--orb-lime);
-  --orb-glow: var(--orb-mint);
-  --orb-accent: var(--orb-orange);
+  transform: scale(1) rotate(0deg);
 }
 
-.reduced .aura,
-.reduced .blobA,
-.reduced .blobB,
-.reduced .blobC,
-.reduced .rings,
-.reduced .ringInner {
-  animation: none;
-}
-
-@keyframes palette {
-  0%,
-  100% {
-    --orb-core: var(--orb-lime);
-    --orb-glow: var(--orb-mint);
-    --orb-accent: var(--orb-orange);
-  }
-  33% {
-    --orb-core: var(--orb-mint);
-    --orb-glow: var(--orb-lime);
-    --orb-accent: var(--orb-orange);
-  }
-  66% {
-    --orb-core: var(--orb-orange);
-    --orb-glow: var(--orb-mint);
-    --orb-accent: var(--orb-lime);
-  }
-}
-
-@keyframes spin {
+@keyframes plusSpin {
   to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spinRev {
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(0.96);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 1;
-  }
-}
-
-@keyframes driftA {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(12%, 8%) scale(1.12);
-  }
-}
-
-@keyframes driftB {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-10%, -12%) scale(1.08);
-  }
-}
-
-@keyframes driftC {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(8%, -10%) scale(1.16);
+    transform: scale(1) rotate(360deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .orb,
-  .aura,
-  .blobA,
-  .blobB,
-  .blobC,
-  .rings,
-  .ringInner {
+  .orb:hover .plus,
+  .orb:focus-visible .plus {
     animation: none;
-  }
-
-  .orb {
-    --orb-core: var(--orb-lime);
-    --orb-glow: var(--orb-mint);
-    --orb-accent: var(--orb-orange);
   }
 }
