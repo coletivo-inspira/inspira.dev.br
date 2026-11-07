@@ -15,17 +15,25 @@ function mockMatchMedia(matchingQueries: string[]) {
 }
 
 function mockCanvasContext() {
-  vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
-    setTransform: vi.fn(),
-    clearRect: vi.fn(),
-    beginPath: vi.fn(),
-    arc: vi.fn(),
-    fill: vi.fn(),
-    stroke: vi.fn(),
-    createRadialGradient: vi.fn(() => ({
-      addColorStop: vi.fn(),
-    })),
-  } as unknown as CanvasRenderingContext2D);
+  const gradient = { addColorStop: vi.fn() };
+  const methods: Record<string, unknown> = {
+    createRadialGradient: vi.fn(() => gradient),
+    createLinearGradient: vi.fn(() => gradient),
+  };
+  const ctx = new Proxy(methods, {
+    get(target, prop: string) {
+      if (!(prop in target)) target[prop] = vi.fn();
+      return target[prop];
+    },
+    set(target, prop: string, value) {
+      target[prop] = value;
+      return true;
+    },
+  });
+  vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(
+    ctx as unknown as CanvasRenderingContext2D,
+  );
+  return methods;
 }
 
 describe("InspiraOrb", () => {
@@ -34,7 +42,7 @@ describe("InspiraOrb", () => {
     vi.restoreAllMocks();
   });
 
-  it("renders a link with the default aria-label and a canvas", () => {
+  it("renders a link with the default aria-label and a decorative canvas", () => {
     mockMatchMedia([]);
     mockCanvasContext();
     const { container } = render(<InspiraOrb />);
@@ -43,23 +51,22 @@ describe("InspiraOrb", () => {
       name: "Coletivo Inspira — ir ao site oficial",
     });
     expect(link).toHaveAttribute("href", "/");
-    expect(container.querySelector("canvas")).not.toBeNull();
+    expect(container.querySelector("canvas")).toHaveAttribute("aria-hidden", "true");
   });
 
   it("accepts a custom href and label", () => {
     mockMatchMedia([]);
     mockCanvasContext();
-    render(
-      <InspiraOrb href="https://inspira.dev.br/" label="Voltar ao hub" />,
-    );
+    render(<InspiraOrb href="https://inspira.dev.br/" label="Voltar ao hub" />);
 
     const link = screen.getByRole("link", { name: "Voltar ao hub" });
     expect(link).toHaveAttribute("href", "https://inspira.dev.br/");
   });
 
-  it("marks reduced-motion when the preference is set", async () => {
+  it("draws a single static frame when reduced motion is requested", async () => {
     mockMatchMedia(["prefers-reduced-motion"]);
-    mockCanvasContext();
+    const methods = mockCanvasContext();
+    const raf = vi.spyOn(window, "requestAnimationFrame");
     render(<InspiraOrb />);
 
     const link = screen.getByRole("link", {
@@ -68,5 +75,7 @@ describe("InspiraOrb", () => {
     await waitFor(() => {
       expect(link).toHaveAttribute("data-reduced-motion", "true");
     });
+    expect(methods.clip).toHaveBeenCalled();
+    expect(raf).not.toHaveBeenCalled();
   });
 });
